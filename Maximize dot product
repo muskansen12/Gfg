@@ -1,0 +1,19 @@
+class Solution{
+  
+ public:
+ int maxDotProduct(int n, int m, int a[], int b[]) 
+ { 
+  vector<vector<int>>dp(n-m+1,vector<int>(m,-1));
+  return f(a,b,n-m,0,n,m,dp);
+ } 
+ int f(int a[], int b[],int z,int i,int n,int m,vector<vector<int>>&dp){
+     if(i==m)return 0;
+     if(dp[z][i]!=-1)return dp[z][i];
+     int d=0;
+     if(z){
+         d=f(a,b,z-1,i,n,m,dp);
+     }
+     d=max(d,a[i+n-m-z]*b[i]+f(a,b,z,i+1,n,m,dp));
+     return dp[z][i]=d;
+ }
+};
